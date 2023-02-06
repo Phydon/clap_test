@@ -8,13 +8,14 @@ fn uptest() -> Command {
         .about("Testing updates")
         .version("1.0.0")
         .author("Leann Phydon <leann.phydon@gmail.com")
+        // .allow_missing_positional(true)
         .subcommand_required(true)
         .arg_required_else_help(true)
         // .allow_external_subcommands(true)
         .subcommand(
             Command::new("run")
                 .short_flag('r')
-                .long_flag("run")
+                // .long_flag("run")
                 .about("run updates"),
         )
         .subcommand(
@@ -28,8 +29,7 @@ fn uptest() -> Command {
             Command::new("exclude")
                 .about("exclude programs from update")
                 .short_flag('e')
-                // FIXME accepts only one argument
-                .arg(arg!(<APP> "The app to exclude"))
+                .arg(arg!(<APP> "The app to exclude").num_args(1..))
                 .arg_required_else_help(true),
         )
 }
